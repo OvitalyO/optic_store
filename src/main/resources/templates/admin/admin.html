@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" th:href="@{/css/admin.css}" type="text/css">
+    <meta charset="UTF-8">
+    <title>Фо Вижн Групп ЛК</title>
+</head>
+<body>
+    <div class="osnova">
+        <div class="block">
+            <!--  flex-container  -->
+            <div class="block__row">
+                <!--  flex-element  -->
+                <div class="block__element block__element_1">
+                    <!--  content  -->
+                    <div class="block__content">
+                        <div class="block__dvatext">
+                            <div class="odin__phone">8(495) 555 55 55</div>
+                            <div class="odin__textphone">понедельник-пятница с 10:00 до 18:00</div>
+                        </div>
+                    </div>
+                </div>
+                    <!--  flex-element  -->
+                <div class="block__element block__element_2">
+                    <!--  content  -->
+                    <div class="block__content">
+                        <a href="/index"><img th:src="@{/img/logo_4.png}" class="logo"></a>
+                    </div>
+                    
+                </div>
+                    <!--  flex-element  -->
+                <div class="block__element block__element_3">
+                    <!--  content  -->
+                    <div class="block__content">
+                        <form class="odin__poisk-text2" method="post" th:action="@{/logout}">
+                            <input class="btn__singin" type="submit" value="Выйти из личного кабинета">
+                        </form>
+                        
+                        <!-- <form class="odin__card" method="get" th:action="@{/cart}">
+                            <input class="btn__singup" type="submit" value="Корзина">
+                        </form>
+                        
+                        <form method="get" th:action="@{/orders}">
+                            <input class="btn__singin3" type="submit" value="История заказов"> -->
+                        </form>
+                    </div>
+                </div>
+                    <!--  flex-element  -->
+                <div class="block__element block__element_4">
+                    <!--  content  -->
+                    <div class="block__content"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dva">
+            <h1>Личный кабинет администратора</h1>
+            <div class="gdedobavit"><a class="dobavitt" href="admin/product/add">Добавить товар</a></div>
+            <div class="block">
+                <!--  flex-container  -->
+                <div class="block__row">
+                    <!--  flex-element  -->
+                    <div class="block__element block__element_5">
+                        <!--  content  -->
+                        <div class="block__content111">
+                            <div class="onemodel" th:each="product : ${products}">
+                                <img class="img-modeli" th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+                                <br>
+                                <p class="block__texta" th:text="'Наименование: ' + ${product.getTitle()}"></p>
+                                <p class="block__texta" th:text="'Описание: ' + ${product.getDescription()}"></p>
+                                <p class="block__texta" th:text="'Цена: ' + ${product.getPrice()}"></p>
+                                <p class="block__texta" th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+                                <p class="block__texta" th:text="'Продавец: ' + ${product.getSeller()}"></p>
+                                <p class="block__texta" th:text="'Категория: ' + ${product.getCategory().getName()}"></p><br>
+                                <div><a class="redact" th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактировать товар</a></div>
+                                <br><br><div><a class="redact2" th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удалить товар</a></div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- <h3>Личный кабинет администратора</h3>
+                <form method="post" th:action="@{/logout}">
+                    <input type="submit" value="Выйти из личного кабинета">
+                </form>
+                <a href="admin/product/add">Добавить товар</a>
+                <hr>
+                <div th:each="product : ${products}">
+                    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+                    <br>
+                    <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+                    <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+                    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                    <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+                    <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+                    <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+                    <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактировать товар</a>
+                    <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удалить товар</a>
+                    <hr>
+                </div> -->
+            </div>  
+        </div>
+        <footer class="footer">
+            <div class='container'>
+                <div class="footer__row">
+                    <!-- <div class="footer__text">8(495) 555 55 55</div> -->
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

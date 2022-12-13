@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" th:href="@{/css/product.css}" type="text/css">
+    <meta charset="UTF-8">
+    <title>Фо Вижн Групп</title>
+</head>
+<body>
+    <div class="osnova">
+        <div class="content">
+            <div class="odin">
+                <div class="container">
+                    <div class="odin__row">
+                        <div class="odin__body">
+                            <div class="odin__title">Фо Вижн Групп</div>
+                            <ul class="odin__list">
+                                <li>Гарантия 6 месяцев!</li>
+                                <li>Минимальный заказ 10 000 руб!</li>
+                                <li>Бесплатная доставка</li>
+                            </ul>
+                        </div>
+                        <div class="odin__forimg">
+                            <a href="/"><img th:src="@{/img/logo_4.png}" class="logo"></a>
+                        </div>
+                        <div class ="odin__poisk">
+                            <div>
+                                <div class="odin__phone">8(495) 555 55 55</div>
+                            </br>
+                                <div class="odin__textphone">понедельник-пятница с 10:00 до 18:00</div>
+                            </div>
+                            
+                            <div class="odin__button">
+                            <button type="button" th:onclick="|window.location.href='/authentication/login'|" class="btn_singin">Войти в личный кабинет</button>
+                            <button type="button" th:onclick="|window.location.href='/authentication/registration'|" class="btn_singup">Регистрация</button>
+                                </div>
+                            <!-- <input class="odin__poisk-text" type="text" name="" placeholder="Поиск товара">
+                            <a class="odin__poisk-my" href="#"></a> -->
+                        </div>
+                        <div class="odin__poisk">
+                            
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="dva">
+                <div class="container">
+                    <div class="dva__menu">
+                        <div class="dva__function">
+                            <form th:method="POST" th:action="@{/product/search}" id="searchForm">
+                                <fieldset class="dva__blockfunc">
+                                    <span >
+                                        <span class="dva__text-vibor">
+                                            <div class="dva__poisk-name">
+                                                <input type="text" name="search" id="search" placeholder="Поиск товара">                            
+                                            </div>
+                                            <div >                           
+                                                <select type="text" form="searchForm" name="category" th:value="${category}" class="dva__size-select" id="category">
+                                                    <option value="">Выберите категорию</option>                                        
+                                                    <option name="option"  th:each="element : ${category}" th:value="${element}" th:text="${element}"
+                                                    th:selected="${element == category}" ></option>                                    
+                                                </select>                                 
+                                            </div>
+                                            <div class="dva__vibor"> 
+                                                <input type="radio" id="ascending_price" name="price" value="asc">
+                                                <label for="ascending_price">по возрастанию цены</label>
+                                                <br><br>                      
+                                                <input type="radio" id="descending_price" name="price" value="desc">
+                                                <label for="descending_price">по убыванию цены</label><br>
+                                                <input class="dva__spez" name="sub" type="submit" value="SEARCH">                             
+                                            </div> 
+
+                                            <div class="dva__priceot">
+                                                <input class="input" type="text" name="Ot" id="Ot" placeholder="Цена от"> 
+                                                <input type="text" name="Do" id="Do" placeholder="Цена до">
+                                            </div>
+                                            
+                                            
+                                        </span>                                                                           
+                                    </span>       
+                                </fieldset>
+                                <br>
+                            </form>
+                            
+                        </div>
+                        <!--  parent -->
+                    <div class="dva__tovary">
+                                <h3>Результат</h3>
+                                <div class="grid1">
+                                <div class="block__content111" th:each="product : ${search_product}">
+                                    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+                                    <br>
+                                    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+                                    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                                    <hr>
+                                    <br>
+                                    <a class="bolcart" th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+                                </div>
+                                </div>
+                                <hr>
+                                <h3>Доступные товары: </h3>
+                                <div class="grid1">
+                                    <div class="block__content111" th:each="product : ${products}">
+                                        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+                                        <br>
+                                        <a class="boltext" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+                                        <p class="boltext" th:text="'Цена: ' + ${product.getPrice()}"></p>
+                                        <hr>
+                                        <br><a class="bolcart" th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+        </div>
+        <footer class="footer">
+            <div class='container'>
+                <div class="footer__row">
+                    <div class="footer__text">8(495) 555 55 55</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/product.css}" type="text/css">
+    <meta charset="UTF-8">
+    <title>Список товаров</title>
+</head>
+<body>
+<div class="osnova1">
+    <form class="block1" th:method="POST" th:action="@{/product/search}">
+        <fieldset>
+            <legend>Выберите параметр для сортировка: </legend>
+            <br>
+            <label for="search">Поиск по наименованию</label>
+            <input name="search" id="search" th:value="*{value_search}">
+            <br>
+            <p>Цена, ₽</p>
+            <label for="ot">От</label>
+            <input type="text" name="ot" id="ot" th:value="*{value_price_ot}">
+            <label for="do">До</label>
+            <input type="text" name="do" id="do" th:value="*{value_price_do}">
+            <br>
+            <br>
+            <div>
+                <label for="ascending_price">Отсортировать по возрастанию цены</label>
+                <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
+                <br>
+                <br>
+                <label for="descending_price">Отсортировать по убыванию цены</label>
+                <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
+                <p>Категория товаров: </p>
+                <label for="furniture">Мебель</label>
+                <input type="radio" id="furniture" name="contact" value="furniture">
+                <label for="appliances">Бытовая техника</label>
+                <input type="radio" id="appliances" name="contact" value="appliances">
+                <label for="clothes">Одежда</label>
+                <input type="radio" id="clothes" name="contact" value="clothes">
+                <br>
+                <br>
+                <input type="submit" value="Найти">
+            </div>
+        </fieldset>
+        <br>
+    </form>
+</div>
+<div class="osnova2">
+    <h3>Результат</h3>
+    <div th:each="product : ${search_product}">
+        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+        <br>
+        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+        <hr>
+    </div>
+    <hr>
+    <h3>Доступные товары: </h3>
+    <hr>
+    <div th:each="product : ${products}">
+        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+        <br>
+        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+        <hr>
+    </div>
+</div>
+</body>
+</html> -->

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" th:href="@{/css/editProduct.css}" type="text/css">
+    <meta charset="UTF-8">
+    <title>Редактирование товаров</title>
+</head>
+<body>
+    <div class="osnova">
+        <div class="block">
+            <!--  flex-container  -->
+            <div class="block__row">
+                <!--  flex-element  -->
+                <div class="block__element block__element_1">
+                    <!--  content  -->
+                    <div class="block__content">
+                        <div class="block__dvatext">
+                            <div class="odin__phone">8(495) 555 55 55</div>
+                            <div class="odin__textphone">понедельник-пятница с 10:00 до 18:00</div>
+                        </div>
+                    </div>
+                </div>
+                    <!--  flex-element  -->
+                <div class="block__element block__element_2">
+                    <!--  content  -->
+                    <div class="block__content">
+                        <a href="/index"><img th:src="@{/img/logo_4.png}" class="logo"></a>
+                    </div>
+                    
+                </div>
+                    <!--  flex-element  -->
+                <div class="block__element block__element_3">
+                    <!--  content  -->
+                    <div class="block__content">
+                        <form class="odin__poisk-text2" method="post" th:action="@{/logout}">
+                            <input class="btn__singin" type="submit" value="Выйти из личного кабинета">
+                        </form>
+                        <br><div class="gdedobavit"><a class="dobavitt" href="/index">Личный кабинет</a></div>
+                        <!-- <form class="odin__card" method="get" th:action="@{/cart}">
+                            <input class="btn__singup" type="submit" value="Корзина">
+                        </form>
+                        
+                        <form method="get" th:action="@{/orders}">
+                            <input class="btn__singin3" type="submit" value="История заказов"> -->
+                        </form>
+                    </div>
+                </div>
+                    <!--  flex-element  -->
+                <div class="block__element block__element_4">
+                    <!--  content  -->
+                    <div class="block__content"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dva">
+            <h1>Редактирование товаров</h1>
+            
+                <form  class="tutform" th:method="POST" th:action="@{/admin/product/edit/{id}(id=${product.getId()})}" th:object="${product}">
+                    
+                    <input class="redactir" type="text" th:field="*{title}" placeholder="Наименование" id="title">
+                    <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                    <label class="dlyatexta" for="title">Введите наименование товара: </label>
+                    <br>
+                    
+                    
+                    <textarea class="redactir" th:field="*{description}" placeholder="Описание" id="description"></textarea>
+                    <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+                    <label class="dlyatexta" for="description">Введите описание товара: </label><br>
+                    
+                    
+                    <input class="redactir" type="number" th:field="*{price}" min="1" step="0." id="price">
+                    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+                    <label class="dlyatexta" for="price">Введите цену товара: </label><br>
+                    
+                    <input class="redactir" type="text" th:field="*{warehouse}" placeholder="Склад" id="warehouse">
+                    <div style="color: red" th:if="${#fields.hasErrors('warehouse')}" th:errors="*{warehouse}"></div>
+                    <label class="dlyatexta" for="warehouse">Введите склад: </label><br>
+                    
+                    
+                    <textarea class="redactir" th:field="*{seller}" placeholder="Продавец" id="seller"></textarea>
+                    <div style="color: red" th:if="${#fields.hasErrors('seller')}" th:errors="*{seller}"></div>
+                    <label class="dlyatexta" for="seller">Введите данные о продавце: </label><br>
+                    
+                    
+                    <select class="dlyaselecta" name="category" th:field="*{category}" id="category">
+                        <div th:each="element : ${category}">
+                            <option  th:text="${element.getName()}" th:value="${element.getId()}"></option>
+                        </div>
+                    </select>
+                    <label class="dlyatexta" for="category">Выберите категорию товара: </label><br>
+                    <input class="redactir2" type="submit" value="Редактировать">
+                </form>
+            </div>  
+        </div>
+        
+    </div>
+</body>
+</html>
